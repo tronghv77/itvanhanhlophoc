@@ -1,6 +1,6 @@
-# ZOOM AUTOMATION PRO
+# GỬI LINK ZOOM CÁ NHÂN HÓA SAU KHI ĐIỀN FORM
 
-**ZOOM AUTOMATION PRO** là một công cụ tự động hóa mạnh mẽ được xây dựng trên nền tảng Google Apps Script, giúp quản lý quy trình đăng ký và điểm danh cho các lớp học hoặc hội thảo trực tuyến qua Zoom.
+**GỬI LINK ZOOM CÁ NHÂN HÓA SAU KHI ĐIỀN FORM** là một công cụ tự động hóa mạnh mẽ được xây dựng trên nền tảng Google Apps Script, giúp quản lý quy trình đăng ký và điểm danh cho các lớp học hoặc hội thảo trực tuyến qua Zoom.
 
 Dự án được phát triển bởi **Master T & Trọng**.
 

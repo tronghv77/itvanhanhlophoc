@@ -1,6 +1,6 @@
 /**
  * ----------------------------------------------------------------------
- * PROJECT: ZOOM AUTOMATION PRO
+ * PROJECT: GỬI LINK ZOOM CÁ NHÂN HÓA SAU KHI ĐIỀN FORM
  * AUTHOR: Master T & Trọng
  * DESCRIPTION: Tự động đăng ký Zoom từ Form & Đồng bộ điểm danh vào Sheet
  * ----------------------------------------------------------------------
