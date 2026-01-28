@@ -13,8 +13,9 @@ const CONFIG = {
     EMAIL: 1, // Cột B: Địa chỉ email
     NAME:  2, // Cột C: Họ và tên
     ZALO:  3, // Cột D: Số Zalo
-    // Cột ghi kết quả điểm danh (ghi sang cột H, I, J để không đè dữ liệu form)
-    RESULT_START: 7 
+    PHONE: 7, // Cột H: Số điện thoại
+    // Cột ghi kết quả điểm danh (ghi sang cột I, J, K để không đè dữ liệu form)
+    RESULT_START: 8 
   }
 };
 
@@ -68,7 +69,7 @@ function onFormSubmit(e) {
     // Lấy dữ liệu thô
     const rawName = e.values[CONFIG.COL_INDEX.NAME]; 
     const emailRaw   = e.values[CONFIG.COL_INDEX.EMAIL];
-    const rawZalo = e.values[CONFIG.COL_INDEX.ZALO];
+    const rawPhone = e.values[CONFIG.COL_INDEX.PHONE];
 
     // Chuẩn hóa email và kiểm tra hợp lệ
     const email = (emailRaw || '').toString().trim().toLowerCase();
@@ -80,15 +81,15 @@ function onFormSubmit(e) {
     // Xử lý Logic Data Cleaning
     const cleanName = standardizeName(rawName);
     
-    // Lấy 2 số cuối Zalo (Mặc định '00' nếu lỗi)
-    let zaloSuffix = "00";
-    if (rawZalo) {
-      const strZalo = rawZalo.toString().trim();
-      if (strZalo.length >= 2) zaloSuffix = strZalo.slice(-2);
+    // Lấy 2 số cuối số điện thoại (Mặc định '00' nếu lỗi)
+    let phoneSuffix = "00";
+    if (rawPhone) {
+      const strPhone = rawPhone.toString().trim();
+      if (strPhone.length >= 2) phoneSuffix = strPhone.slice(-2);
     }
 
-    // Format tên hiển thị Zoom: "26" và "- Nguyễn Văn Minh"
-    const zoomFirstName = zaloSuffix;
+    // Format tên hiển thị Zoom: "25 - Hồ Văn Trọng"
+    const zoomFirstName = phoneSuffix;
     const zoomLastName  = `- ${cleanName}`;
 
     // Gọi API Zoom
