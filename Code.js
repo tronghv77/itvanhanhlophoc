@@ -94,6 +94,12 @@ function onFormSubmit(e) {
     // Gọi API Zoom
     const joinUrl = registerUserToZoom(email, zoomFirstName, zoomLastName);
 
+    // Kiểm tra nếu gặp lỗi rate limit
+    if (joinUrl && joinUrl.error === 'RATE_LIMIT') {
+      sendRateLimitEmail(email, cleanName);
+      return;
+    }
+
     // Gửi Email
     if (joinUrl) {
       sendEmailWithUniqueLink(email, cleanName, joinUrl);
@@ -188,6 +194,13 @@ function registerUserToZoom(email, firstName, lastName) {
     console.error(`Zoom register parse error (status ${status}): ${body.slice(0, 400)}`);
     return null;
   }
+  
+  // Kiểm tra lỗi rate limit
+  if (status === 429 || (json.code === 4300 && json.message && json.message.includes("exceeded the daily rate limit"))) {
+    console.warn(`Rate limit exceeded for email: ${email}`);
+    return { error: 'RATE_LIMIT', email: email, firstName: firstName, lastName: lastName };
+  }
+  
   if (json.join_url) return json.join_url;
 
   console.error(`Zoom register failed (status ${status}): ${body.slice(0, 400)}`);
@@ -325,6 +338,137 @@ function sendEmailWithUniqueLink(email, name, link) {
     htmlBody,
     plainBody,
     from: 'trong@hovantrong.com', // gửi từ alias (cần cấu hình alias trong Gmail trước)
+    name: 'Hồ Văn Trọng',
+    replyTo: 'trong@hovantrong.com'
+  });
+}
+
+// Helper: Gửi Email thông báo khi vượt quá giới hạn rate limit
+function sendRateLimitEmail(email, name) {
+  const subject = '[⚠️ Thông báo] Đạt giới hạn đăng ký - Vui lòng sử dụng email khác';
+  
+  const htmlBody = `
+    <!DOCTYPE html>
+    <html lang="vi">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <title>Thông báo giới hạn đăng ký</title>
+    </head>
+    <body style="margin:0; padding:0; background-color:#f5f7fa; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#f5f7fa; padding:30px 15px;">
+        <tr>
+          <td align="center">
+            <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px; background:#ffffff; border-radius:16px; box-shadow:0 4px 24px rgba(0,0,0,0.08); overflow:hidden;">
+              
+              <!-- Header -->
+              <tr>
+                <td style="background: linear-gradient(135deg, #f97316 0%, #ea580c 100%); padding:35px 40px; text-align:center;">
+                  <p style="margin:0 0 8px 0; font-size:13px; color:rgba(255,255,255,0.85); text-transform:uppercase; letter-spacing:1.5px;">⚠️ THÔNG BÁO QUAN TRỌNG</p>
+                  <h1 style="margin:0; font-size:23px; font-weight:700; color:#ffffff; line-height:1.3;">Đạt Giới Hạn Đăng Ký<br/>Hôm Nay</h1>
+                </td>
+              </tr>
+              
+              <!-- Content -->
+              <tr>
+                <td style="padding:35px 40px;">
+                  <p style="margin:0 0 20px 0; font-size:16px; color:#2d3748; line-height:1.7;">
+                    Chào <strong style="color:#f97316;">${name}</strong>,
+                  </p>
+                  
+                  <p style="margin:0 0 20px 0; font-size:15px; color:#4a5568; line-height:1.8;">
+                    Hệ thống đã nhận được yêu cầu đăng ký của bạn, nhưng <strong>email này đã đạt giới hạn 3 lần đăng ký trong 24 giờ quy định của Zoom API</strong>.
+                  </p>
+                  
+                  <p style="margin:0 0 20px 0; font-size:15px; color:#4a5568; line-height:1.8;">
+                    <strong>⏰ Lý do:</strong> Zoom Pro account giới hạn mỗi email được đăng ký tối đa 3 lần/ngày để bảo vệ hệ thống. Giới hạn này sẽ reset vào 00:00 ngày hôm sau (GMT+7).
+                  </p>
+                  
+                  <!-- Giải pháp -->
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#ecfdf5; border-radius:12px; border-left:4px solid #16a34a; margin:25px 0;">
+                    <tr>
+                      <td style="padding:20px 25px;">
+                        <p style="margin:0 0 15px 0; font-size:15px; font-weight:700; color:#15803d;">✅ Giải pháp</p>
+                        <p style="margin:0 0 10px 0; font-size:14px; color:#2d3748; line-height:1.7;">
+                          <strong>Cách 1 (Nhanh nhất):</strong> Dùng email khác để đăng ký lại. Chúng tôi sẽ tạo 1 link Zoom duy nhất cho email mới của bạn.
+                        </p>
+                        <p style="margin:0 0 10px 0; font-size:14px; color:#2d3748; line-height:1.7;">
+                          <strong>Cách 2 (Chờ):</strong> Nếu muốn dùng email này, vui lòng thử lại vào ngày mai (sau 24h).
+                        </p>
+                        <p style="margin:0; font-size:14px; color:#2d3748; line-height:1.7;">
+                          <strong>Cách 3 (Liên hệ):</strong> Gọi/Zalo/Telegram 0936 099 625 (Mr. Trọng) để được hỗ trợ thêm.
+                        </p>
+                      </td>
+                    </tr>
+                  </table>
+                  
+                  <p style="margin:25px 0 15px 0; font-size:15px; color:#2d3748; line-height:1.8;">
+                    <strong>Các bước tiếp theo:</strong>
+                  </p>
+                  
+                  <ol style="margin:0 0 25px 0; padding-left:20px; font-size:14px; color:#4a5568; line-height:1.8;">
+                    <li style="margin-bottom:10px;">
+                      <strong>Nếu chọn email mới:</strong> Vui lòng dùng email khác mà bạn có quyền truy cập và gửi form đăng ký lại.
+                    </li>
+                    <li style="margin-bottom:10px;">
+                      <strong>Xác nhận:</strong> Bạn sẽ nhận email xác nhận link Zoom trong vòng vài giây.
+                    </li>
+                    <li>
+                      <strong>Tham gia:</strong> Sử dụng link đó để tham gia buổi thảo luận vào ngày 31/01/2026.
+                    </li>
+                  </ol>
+                  
+                  <!-- CTA Button -->
+                  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin:30px 0;">
+                    <tr>
+                      <td align="center">
+                        <a href="https://docs.google.com/forms/d/YOUR_FORM_ID/viewform" style="display:inline-block; background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color:#ffffff; text-decoration:none; padding:14px 40px; border-radius:50px; font-weight:700; font-size:15px; box-shadow:0 4px 15px rgba(22,163,74,0.4);">
+                          QUAY LẠI FORM ĐĂNG KÝ
+                        </a>
+                      </td>
+                    </tr>
+                  </table>
+                  
+                  <p style="margin:30px 0 0 0; font-size:13px; color:#718096; line-height:1.6; border-top:1px solid #e2e8f0; padding-top:20px;">
+                    <strong>💡 Lưu ý:</strong> Đây là giới hạn của hệ thống Zoom API (Zoom Pro Account). Nếu muốn tăng giới hạn lên 10 lần/ngày hoặc cao hơn, bạn cần nâng cấp lên Zoom Business Account.
+                  </p>
+                </td>
+              </tr>
+              
+              <!-- Footer -->
+              <tr>
+                <td style="background:#f7fafc; padding:25px 40px; border-top:1px solid #e2e8f0;">
+                  <p style="margin:0; font-size:14px; color:#718096; line-height:1.6;">
+                    Trân trọng,<br/>
+                    <strong style="color:#4a5568;">Hồ Văn Trọng</strong><br/>
+                    <span style="font-size:12px; color:#a0aec0;">Hotline: 0936 099 625</span>
+                  </p>
+                </td>
+              </tr>
+              
+            </table>
+          </td>
+        </tr>
+      </table>
+    </body>
+    </html>
+  `;
+  
+  const plainBody =
+    `Chào ${name},\n\n` +
+    `Email này đã đạt giới hạn 3 lần đăng ký trong 24 giờ (quy định của Zoom API).\n\n` +
+    `GIẢI PHÁP:\n` +
+    `1. Nhanh nhất: Dùng email khác để đăng ký lại\n` +
+    `2. Chờ: Thử lại ngày mai sau 24h\n` +
+    `3. Liên hệ: 0936 099 625 (Mr. Trọng)\n\n` +
+    `Chi tiết xem trong email HTML.\n\n` +
+    `Trân trọng,\n` +
+    `Hồ Văn Trọng`;
+    
+  GmailApp.sendEmail(email, subject, "", {
+    htmlBody,
+    plainBody,
+    from: 'trong@hovantrong.com',
     name: 'Hồ Văn Trọng',
     replyTo: 'trong@hovantrong.com'
   });
