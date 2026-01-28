@@ -428,10 +428,6 @@ function sendRateLimitEmail(email, name) {
                       </td>
                     </tr>
                   </table>
-                  
-                  <p style="margin:30px 0 0 0; font-size:13px; color:#718096; line-height:1.6; border-top:1px solid #e2e8f0; padding-top:20px;">
-                    <strong>💡 Lưu ý:</strong> Đây là giới hạn của hệ thống Zoom API (Zoom Pro Account). Nếu muốn tăng giới hạn lên 10 lần/ngày hoặc cao hơn, bạn cần nâng cấp lên Zoom Business Account.
-                  </p>
                 </td>
               </tr>
               
