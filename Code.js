@@ -422,7 +422,7 @@ function sendRateLimitEmail(email, name) {
                   <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin:30px 0;">
                     <tr>
                       <td align="center">
-                        <a href="https://docs.google.com/forms/d/YOUR_FORM_ID/viewform" style="display:inline-block; background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color:#ffffff; text-decoration:none; padding:14px 40px; border-radius:50px; font-weight:700; font-size:15px; box-shadow:0 4px 15px rgba(22,163,74,0.4);">
+                        <a href="https://forms.gle/vL8A2nwYpFneRdeW9" style="display:inline-block; background: linear-gradient(135deg, #16a34a 0%, #15803d 100%); color:#ffffff; text-decoration:none; padding:14px 40px; border-radius:50px; font-weight:700; font-size:15px; box-shadow:0 4px 15px rgba(22,163,74,0.4);">
                           QUAY LẠI FORM ĐĂNG KÝ
                         </a>
                       </td>
