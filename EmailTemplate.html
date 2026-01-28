@@ -30,9 +30,24 @@
               <p style="margin:0 0 15px 0; font-size:15px; color:#4a5568; line-height:1.8;">
                 Hệ thống đã ghi nhận đăng ký của bạn cho buổi thảo luận <strong>"Bí mật đằng sau một lớp học diễn ra trôi chảy"</strong>. 
               </p>
-              <p style="margin:0; font-size:15px; color:#4a5568; line-height:1.8;">
+              <p style="margin:0 0 15px 0; font-size:15px; color:#4a5568; line-height:1.8;">
                 Dưới đây là link Zoom <strong style="color:#e53e3e;">dành riêng cho bạn</strong>. Vui lòng dùng đúng link này để tham gia.
               </p>
+              
+              <!-- Thông báo tên Zoom -->
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#f0fdf4; border-radius:12px; border-left:4px solid #16a34a; margin:20px 0;">
+                <tr>
+                  <td style="padding:15px 20px;">
+                    <p style="margin:0 0 10px 0; font-size:14px; font-weight:700; color:#15803d;">📝 Tên bạn trong Zoom:</p>
+                    <p style="margin:0 0 10px 0; font-size:15px; color:#2d3748; font-weight:700; font-family:monospace; letter-spacing:0.5px;">
+                      <?= zoomNumber ?> - <?= name ?>
+                    </p>
+                    <p style="margin:0; font-size:13px; color:#4a5568; line-height:1.6;">
+                      <strong>Lưu ý:</strong> Mã số <strong style="color:#16a34a;"><?= zoomNumber ?></strong> sẽ được dùng để <strong>quay số trung thưởng</strong> trong chương trình. Vui lòng ghi nhớ mã số này!
+                    </p>
+                  </td>
+                </tr>
+              </table>
             </td>
           </tr>
           

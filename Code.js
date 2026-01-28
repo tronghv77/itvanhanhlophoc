@@ -103,7 +103,7 @@ function onFormSubmit(e) {
 
     // Gửi Email
     if (joinUrl) {
-      sendEmailWithUniqueLink(email, cleanName, joinUrl);
+      sendEmailWithUniqueLink(email, cleanName, joinUrl, zoomFirstName);
     }
 
   } catch (err) {
@@ -323,22 +323,25 @@ function isValidEmail(email) {
 }
 
 // Helper: Gửi Email HTML
-function sendEmailWithUniqueLink(email, name, link) {
+function sendEmailWithUniqueLink(email, name, link, zoomNumber) {
   const subject = '[Vé tham dự] CHUYÊN ĐỀ: QUY TRÌNH & CÔNG NGHỆ VẬN HÀNH LỚP HỌC ONLINE';
   const template = HtmlService.createTemplateFromFile('EmailTemplate');
   template.name = name;
   template.link = link;
+  template.zoomNumber = zoomNumber || '00'; // Default '00' nếu không có
   const htmlBody = template.evaluate().getContent();
   const plainBody =
     `Chào ${name},\n` +
     `Bạn đã đăng ký chuyên đề "Quy trình & Công nghệ vận hành lớp học online".\n` +
+    `Tên Zoom của bạn: ${zoomNumber} - ${name}\n` +
+    `Mã số ${zoomNumber} sẽ dùng để quay số trung thưởng trong chương trình.\n` +
     `Link Zoom dành riêng cho bạn: ${link}\n` +
     `Nếu nút trong email không bấm được, hãy dán link này vào trình duyệt.\n` +
     `Hẹn gặp bạn trong lớp!`;
   GmailApp.sendEmail(email, subject, "", {
     htmlBody,
     plainBody,
-    from: 'trong@hovantrong.com', // gửi từ alias (cần cấu hình alias trong Gmail trước)
+    from: 'trong@hovantrong.com',
     name: 'Hồ Văn Trọng',
     replyTo: 'trong@hovantrong.com'
   });
