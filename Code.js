@@ -637,9 +637,9 @@ function sendEmailWithUniqueLink(email, name, link, zoomNumber) {
   GmailApp.sendEmail(email, subject, "", {
     htmlBody,
     plainBody,
-    from: 'trong@hovantrong.com',
+    from: 'admin@hovantrong.com',
     name: 'Hồ Văn Trọng',
-    replyTo: 'trong@hovantrong.com'
+    replyTo: 'admin@hovantrong.com'
   });
 }
 
@@ -678,9 +678,9 @@ function sendClassReminderEmail(email, name, className, classTime, format, instr
     
   GmailApp.sendEmail(email, subject, plainBody, {
     htmlBody,
-    from: 'trong@hovantrong.com',
+    from: 'admin@hovantrong.com',
     name: 'Hồ Văn Trọng',
-    replyTo: 'trong@hovantrong.com'
+    replyTo: 'admin@hovantrong.com'
   });
 }
 
@@ -706,9 +706,9 @@ function sendRateLimitEmail(email, name) {
   GmailApp.sendEmail(email, subject, "", {
     htmlBody,
     plainBody,
-    from: 'trong@hovantrong.com',
+    from: 'admin@hovantrong.com',
     name: 'Hồ Văn Trọng',
-    replyTo: 'trong@hovantrong.com'
+    replyTo: 'admin@hovantrong.com'
   });
 }
 
@@ -1050,9 +1050,9 @@ function sendInvitationEmail(email, name) {
     
   GmailApp.sendEmail(email, subject, plainBody, {
     htmlBody,
-    from: 'trong@hovantrong.com',
+    from: 'admin@hovantrong.com',
     name: 'Hồ Văn Trọng',
-    replyTo: 'trong@hovantrong.com'
+    replyTo: 'admin@hovantrong.com'
   });
 }
 
