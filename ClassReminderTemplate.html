@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nhắc nhớ lớp học</title>
+</head>
+<body style="margin:0; padding:0; background-color:#f0f4f8; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color:#f0f4f8; padding:40px 15px;">
+    <tr>
+      <td align="center">
+        <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px; background:#ffffff; border-radius:20px; box-shadow:0 25px 50px rgba(0,0,0,0.25); overflow:hidden;">
+          
+          <!-- Header -->
+          <tr>
+            <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%); padding:50px 40px; text-align:center;">
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center">
+                <tr>
+                  <td style="width:80px; height:80px; background:rgba(255,255,255,0.2); border-radius:50%; text-align:center; vertical-align:middle;">
+                    <span style="font-size:36px; line-height:80px;">&#9200;</span>
+                  </td>
+                </tr>
+              </table>
+              <h1 style="margin:20px 0 10px 0; font-size:28px; font-weight:800; color:#ffffff; letter-spacing:-0.5px;">SẮP BẮT ĐẦU!</h1>
+              <p style="margin:0; font-size:15px; color:rgba(255,255,255,0.9);">Buổi chia sẻ của bạn sẽ diễn ra <?= timeRemaining ?></p>
+            </td>
+          </tr>
+
+          <!-- Countdown Box -->
+          <tr>
+            <td style="padding:0 40px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="margin-top:-30px;">
+                <tr>
+                  <td style="background:linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%); border-radius:16px; padding:25px 30px; text-align:center; box-shadow:0 4px 15px rgba(251,191,36,0.3);">
+                    <p style="margin:0 0 5px 0; font-size:13px; color:#78350f; text-transform:uppercase; letter-spacing:2px; font-weight:600;">THỜI GIAN</p>
+                    <p style="margin:0; font-size:22px; font-weight:700; color:#1e293b;"><?= classTime ?></p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+          
+          <!-- Greeting -->
+          <tr>
+            <td style="padding:35px 40px 20px 40px; text-align:center;">
+              <p style="margin:0 0 8px 0; font-size:16px; color:#64748b;">Xin chào</p>
+              <p style="margin:0; font-size:22px; font-weight:700; color:#1e293b;"><?= name ?></p>
+            </td>
+          </tr>
+
+          <!-- Ten lop hoc -->
+          <tr>
+            <td style="padding:0 40px 30px 40px; text-align:center;">
+              <p style="margin:0; font-size:17px; color:#475569; line-height:1.6;">
+                Lớp <strong style="color:#7c3aed;">"<?= className ?>"</strong><br/>chuẩn bị bắt đầu rồi!
+              </p>
+            </td>
+          </tr>
+
+          <!-- Divider -->
+          <tr>
+            <td style="padding:0 40px;">
+              <div style="height:1px; background:linear-gradient(90deg, transparent, #e2e8f0, transparent);"></div>
+            </td>
+          </tr>
+
+          <!-- CTA Section -->
+          <tr>
+            <td style="padding:35px 40px; text-align:center;">
+              <p style="margin:0 0 20px 0; font-size:15px; color:#64748b; line-height:1.7;">
+                Link Zoom cá nhân nằm trong email<br/><strong style="color:#1e293b;">"[Vé tham dự] CHUYÊN ĐỀ: QUY TRÌNH & CÔNG NGHỆ VẬN HÀNH LỚP HỌC ONLINE"</strong> đã gửi lúc đăng ký
+              </p>
+              <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center">
+                <tr>
+                  <td style="background:linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius:50px;">
+                    <a href="https://mail.google.com/mail/u/0/#search/%5BV%C3%A9+tham+d%E1%BB%B1%5D+CHUY%C3%8AN+%C4%90%E1%BB%80%3A+QUY+TR%C3%8CNH+%26+C%C3%94NG+NGH%E1%BB%86+V%E1%BA%ACN+H%C3%80NH+L%E1%BB%9AP+H%E1%BB%8CC+ONLINE" style="display:inline-block; color:#ffffff; text-decoration:none; padding:16px 40px; font-weight:700; font-size:15px;">
+                      TÌM EMAIL VÉ THAM DỰ
+                    </a>
+                  </td>
+                </tr>
+              </table>
+              <p style="margin:20px 0 0 0; font-size:13px; color:#94a3b8;">
+                Không tìm thấy? Kiểm tra mục <strong>Spam</strong> hoặc <strong>Thư mục khác</strong>
+              </p>
+            </td>
+          </tr>
+
+          <!-- Reminder -->
+          <tr>
+            <td style="padding:0 40px 25px 40px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#fef3c7; border-radius:12px; border-left:4px solid #f59e0b;">
+                <tr>
+                  <td style="padding:20px 25px; text-align:center;">
+                    <p style="margin:0; font-size:14px; color:#92400e; line-height:1.7;">
+                      <strong style="color:#b45309;">&#9888; Nhắc nhở quan trọng</strong><br/>
+                      Phòng Zoom sẽ mở trước 15 phút. Vào sớm để ổn định kết nối và chuẩn bị!
+                    </p>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Thong tin dien gia -->
+          <tr>
+            <td style="padding:0 40px 35px 40px;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#f8fafc; border-radius:12px;">
+                <tr>
+                  <td style="padding:20px 25px;">
+                    <table role="presentation" cellspacing="0" cellpadding="0" border="0">
+                      <tr>
+                        <td style="width:50px; vertical-align:top;">
+                          <div style="width:45px; height:45px; background:linear-gradient(135deg, #667eea, #764ba2); border-radius:50%; text-align:center; line-height:45px; color:#fff; font-weight:700; font-size:18px;">T</div>
+                        </td>
+                        <td style="padding-left:15px; vertical-align:middle;">
+                          <p style="margin:0 0 3px 0; font-size:11px; color:#94a3b8; text-transform:uppercase; letter-spacing:1px;">DIỄN GIẢ</p>
+                          <p style="margin:0; font-size:15px; font-weight:600; color:#1e293b;"><?= instructor ?></p>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Hotline -->
+          <tr>
+            <td style="padding:0 40px 35px 40px; text-align:center;">
+              <p style="margin:0; font-size:14px; color:#64748b;">
+                Cần hỗ trợ? Gọi ngay <a href="tel:0936099625" style="color:#7c3aed; font-weight:700; text-decoration:none;">0936 099 625</a>
+              </p>
+            </td>
+          </tr>
+          
+          <!-- Footer -->
+          <tr>
+            <td style="background:#f8fafc; padding:25px 40px; text-align:center; border-top:1px solid #e2e8f0;">
+              <p style="margin:0; font-size:13px; color:#94a3b8;">
+                Hẹn gặp bạn trong lớp!
+              </p>
+            </td>
+          </tr>
+          
+        </table>
+
+        <!-- Sub footer -->
+        <table role="presentation" width="600" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;">
+          <tr>
+            <td style="padding:25px 40px; text-align:center;">
+              <p style="margin:0; font-size:12px; color:#64748b;">
+                © 2026 Hồ Văn Trọng | IT &amp; Phát triển tâm thức
+              </p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
